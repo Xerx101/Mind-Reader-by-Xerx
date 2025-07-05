@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mind Reading Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background-color: #f4f4f4;
+        }
+        #output {
+            white-space: pre-wrap;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🧠 I Will Read Your Mind</h1>
+    <p>Think of a number... and follow my instructions carefully.</p>
+
+    <button onclick="startGame()">Start Game</button>
+    <div id="output"></div>
+
+    <script>
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function startGame() {
+            const output = document.getElementById('output');
+            output.innerText = '';
+
+            const add1 = Math.floor(Math.random() * 10 + 5);    // 5–14
+            const sub1 = Math.floor(Math.random() * 5 + 1);     // 1–5
+            const add2 = Math.floor(Math.random() * 7 + 3);     // 3–9
+            const multiplier = Math.floor(Math.random() * 5 + 2); // 2–6
+
+            const finalAnswer = (add1 - sub1 + add2) * multiplier;
+
+            const steps = [
+                "Add " + add1 + " to your number...",
+                "Now subtract " + sub1 + " from that...",
+                "Now add " + add2 + " more...",
+                "Subtract your original number...",
+                "And finally... multiply that by " + multiplier + "!",
+                "Calculating your result...",
+                "Your answer is... " + finalAnswer + " 🎉"
+            ];
+
+            for (let step of steps) {
+                output.innerText += step + "\n";
+                await delay(2000);
+            }
+        }
+    </script>
+
+</body>
+</html>
